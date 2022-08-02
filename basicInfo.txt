@@ -1,0 +1,205 @@
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+         Rearrange-1             [64, 49, 3072]               0
+            Linear-2             [64, 49, 1024]       3,146,752
+           Dropout-3             [64, 50, 1024]               0
+         LayerNorm-4             [64, 50, 1024]           2,048
+            Linear-5             [64, 50, 3072]       3,145,728
+            Linear-6             [64, 50, 1024]       1,049,600
+           Dropout-7             [64, 50, 1024]               0
+     testAttention-8             [64, 50, 1024]               0
+           PreNorm-9             [64, 50, 1024]               0
+        LayerNorm-10             [64, 50, 1024]           2,048
+           Linear-11             [64, 50, 2048]       2,099,200
+             GELU-12             [64, 50, 2048]               0
+          Dropout-13             [64, 50, 2048]               0
+           Linear-14             [64, 50, 1024]       2,098,176
+          Dropout-15             [64, 50, 1024]               0
+      FeedForward-16             [64, 50, 1024]               0
+          PreNorm-17             [64, 50, 1024]               0
+        LayerNorm-18             [64, 50, 1024]           2,048
+           Linear-19             [64, 50, 3072]       3,145,728
+           Linear-20             [64, 50, 1024]       1,049,600
+          Dropout-21             [64, 50, 1024]               0
+    testAttention-22             [64, 50, 1024]               0
+          PreNorm-23             [64, 50, 1024]               0
+        LayerNorm-24             [64, 50, 1024]           2,048
+           Linear-25             [64, 50, 2048]       2,099,200
+             GELU-26             [64, 50, 2048]               0
+          Dropout-27             [64, 50, 2048]               0
+           Linear-28             [64, 50, 1024]       2,098,176
+          Dropout-29             [64, 50, 1024]               0
+      FeedForward-30             [64, 50, 1024]               0
+          PreNorm-31             [64, 50, 1024]               0
+        LayerNorm-32             [64, 50, 1024]           2,048
+           Linear-33             [64, 50, 3072]       3,145,728
+           Linear-34             [64, 50, 1024]       1,049,600
+          Dropout-35             [64, 50, 1024]               0
+    testAttention-36             [64, 50, 1024]               0
+          PreNorm-37             [64, 50, 1024]               0
+        LayerNorm-38             [64, 50, 1024]           2,048
+           Linear-39             [64, 50, 2048]       2,099,200
+             GELU-40             [64, 50, 2048]               0
+          Dropout-41             [64, 50, 2048]               0
+           Linear-42             [64, 50, 1024]       2,098,176
+          Dropout-43             [64, 50, 1024]               0
+      FeedForward-44             [64, 50, 1024]               0
+          PreNorm-45             [64, 50, 1024]               0
+        LayerNorm-46             [64, 50, 1024]           2,048
+           Linear-47             [64, 50, 3072]       3,145,728
+           Linear-48             [64, 50, 1024]       1,049,600
+          Dropout-49             [64, 50, 1024]               0
+    testAttention-50             [64, 50, 1024]               0
+          PreNorm-51             [64, 50, 1024]               0
+        LayerNorm-52             [64, 50, 1024]           2,048
+           Linear-53             [64, 50, 2048]       2,099,200
+             GELU-54             [64, 50, 2048]               0
+          Dropout-55             [64, 50, 2048]               0
+           Linear-56             [64, 50, 1024]       2,098,176
+          Dropout-57             [64, 50, 1024]               0
+      FeedForward-58             [64, 50, 1024]               0
+          PreNorm-59             [64, 50, 1024]               0
+        LayerNorm-60             [64, 50, 1024]           2,048
+           Linear-61             [64, 50, 3072]       3,145,728
+           Linear-62             [64, 50, 1024]       1,049,600
+          Dropout-63             [64, 50, 1024]               0
+    testAttention-64             [64, 50, 1024]               0
+          PreNorm-65             [64, 50, 1024]               0
+        LayerNorm-66             [64, 50, 1024]           2,048
+           Linear-67             [64, 50, 2048]       2,099,200
+             GELU-68             [64, 50, 2048]               0
+          Dropout-69             [64, 50, 2048]               0
+           Linear-70             [64, 50, 1024]       2,098,176
+          Dropout-71             [64, 50, 1024]               0
+      FeedForward-72             [64, 50, 1024]               0
+          PreNorm-73             [64, 50, 1024]               0
+        LayerNorm-74             [64, 50, 1024]           2,048
+           Linear-75             [64, 50, 3072]       3,145,728
+           Linear-76             [64, 50, 1024]       1,049,600
+          Dropout-77             [64, 50, 1024]               0
+    testAttention-78             [64, 50, 1024]               0
+          PreNorm-79             [64, 50, 1024]               0
+        LayerNorm-80             [64, 50, 1024]           2,048
+           Linear-81             [64, 50, 2048]       2,099,200
+             GELU-82             [64, 50, 2048]               0
+          Dropout-83             [64, 50, 2048]               0
+           Linear-84             [64, 50, 1024]       2,098,176
+          Dropout-85             [64, 50, 1024]               0
+      FeedForward-86             [64, 50, 1024]               0
+          PreNorm-87             [64, 50, 1024]               0
+        Cosformer-88             [64, 50, 1024]               0
+         Identity-89                 [64, 1024]               0
+        LayerNorm-90                 [64, 1024]           2,048
+           Linear-91                    [64, 2]           2,050
+================================================================
+Total params: 53,531,650
+Trainable params: 53,531,650
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 36.75
+Forward/backward pass size (MB): 2999.00
+Params size (MB): 204.21
+Estimated Total Size (MB): 3239.96
+----------------------------------------------------------------
+===========================================================================
+Layer (type:depth-idx)                             Param #
+===========================================================================
+ViT                                                52,224
+├─Sequential: 1-1                                  --
+│    └─Rearrange: 2-1                              --
+│    └─Linear: 2-2                                 3,146,752
+├─Dropout: 1-2                                     --
+├─Cosformer: 1-3                                   --
+│    └─ModuleList: 2-3                             --
+│    │    └─ModuleList: 3-1                        8,396,800
+│    │    └─ModuleList: 3-2                        8,396,800
+│    │    └─ModuleList: 3-3                        8,396,800
+│    │    └─ModuleList: 3-4                        8,396,800
+│    │    └─ModuleList: 3-5                        8,396,800
+│    │    └─ModuleList: 3-6                        8,396,800
+├─Identity: 1-4                                    --
+├─Sequential: 1-5                                  --
+│    └─LayerNorm: 2-4                              2,048
+│    └─Linear: 2-5                                 2,050
+===========================================================================
+Total params: 53,583,874
+Trainable params: 53,583,874
+Non-trainable params: 0
+===========================================================================
+odict_keys(['pos_embedding', 'cls_token', 'to_patch_embedding.1.weight', 'to_patch_embedding.1.bias', 'transformer.layers.0.0.norm.weight', 'transformer.layers.0.0.norm.bias', 'transformer.layers.0.0.fn.to_qkv.weight', 'transformer.layers.0.0.fn.to_out.0.weight', 'transformer.layers.0.0.fn.to_out.0.bias', 'transformer.layers.0.1.norm.weight', 'transformer.layers.0.1.norm.bias', 'transformer.layers.0.1.fn.net.0.weight', 'transformer.layers.0.1.fn.net.0.bias', 'transformer.layers.0.1.fn.net.3.weight', 'transformer.layers.0.1.fn.net.3.bias', 'transformer.layers.1.0.norm.weight', 'transformer.layers.1.0.norm.bias', 'transformer.layers.1.0.fn.to_qkv.weight', 'transformer.layers.1.0.fn.to_out.0.weight', 'transformer.layers.1.0.fn.to_out.0.bias', 'transformer.layers.1.1.norm.weight', 'transformer.layers.1.1.norm.bias', 'transformer.layers.1.1.fn.net.0.weight', 'transformer.layers.1.1.fn.net.0.bias', 'transformer.layers.1.1.fn.net.3.weight', 'transformer.layers.1.1.fn.net.3.bias', 'transformer.layers.2.0.norm.weight', 'transformer.layers.2.0.norm.bias', 'transformer.layers.2.0.fn.to_qkv.weight', 'transformer.layers.2.0.fn.to_out.0.weight', 'transformer.layers.2.0.fn.to_out.0.bias', 'transformer.layers.2.1.norm.weight', 'transformer.layers.2.1.norm.bias', 'transformer.layers.2.1.fn.net.0.weight', 'transformer.layers.2.1.fn.net.0.bias', 'transformer.layers.2.1.fn.net.3.weight', 'transformer.layers.2.1.fn.net.3.bias', 'transformer.layers.3.0.norm.weight', 'transformer.layers.3.0.norm.bias', 'transformer.layers.3.0.fn.to_qkv.weight', 'transformer.layers.3.0.fn.to_out.0.weight', 'transformer.layers.3.0.fn.to_out.0.bias', 'transformer.layers.3.1.norm.weight', 'transformer.layers.3.1.norm.bias', 'transformer.layers.3.1.fn.net.0.weight', 'transformer.layers.3.1.fn.net.0.bias', 'transformer.layers.3.1.fn.net.3.weight', 'transformer.layers.3.1.fn.net.3.bias', 'transformer.layers.4.0.norm.weight', 'transformer.layers.4.0.norm.bias', 'transformer.layers.4.0.fn.to_qkv.weight', 'transformer.layers.4.0.fn.to_out.0.weight', 'transformer.layers.4.0.fn.to_out.0.bias', 'transformer.layers.4.1.norm.weight', 'transformer.layers.4.1.norm.bias', 'transformer.layers.4.1.fn.net.0.weight', 'transformer.layers.4.1.fn.net.0.bias', 'transformer.layers.4.1.fn.net.3.weight', 'transformer.layers.4.1.fn.net.3.bias', 'transformer.layers.5.0.norm.weight', 'transformer.layers.5.0.norm.bias', 'transformer.layers.5.0.fn.to_qkv.weight', 'transformer.layers.5.0.fn.to_out.0.weight', 'transformer.layers.5.0.fn.to_out.0.bias', 'transformer.layers.5.1.norm.weight', 'transformer.layers.5.1.norm.bias', 'transformer.layers.5.1.fn.net.0.weight', 'transformer.layers.5.1.fn.net.0.bias', 'transformer.layers.5.1.fn.net.3.weight', 'transformer.layers.5.1.fn.net.3.bias', 'mlp_head.0.weight', 'mlp_head.0.bias', 'mlp_head.1.weight', 'mlp_head.1.bias'])
+74
+-->name: pos_embedding -->grad_requirs: True  -->shape: torch.Size([1, 50, 1024])
+-->name: cls_token -->grad_requirs: True  -->shape: torch.Size([1, 1, 1024])
+-->name: to_patch_embedding.1.weight -->grad_requirs: True  -->shape: torch.Size([1024, 3072])
+-->name: to_patch_embedding.1.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.0.0.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.0.0.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.0.0.fn.to_qkv.weight -->grad_requirs: True  -->shape: torch.Size([3072, 1024])
+-->name: transformer.layers.0.0.fn.to_out.0.weight -->grad_requirs: True  -->shape: torch.Size([1024, 1024])
+-->name: transformer.layers.0.0.fn.to_out.0.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.0.1.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.0.1.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.0.1.fn.net.0.weight -->grad_requirs: True  -->shape: torch.Size([2048, 1024])
+-->name: transformer.layers.0.1.fn.net.0.bias -->grad_requirs: True  -->shape: torch.Size([2048])
+-->name: transformer.layers.0.1.fn.net.3.weight -->grad_requirs: True  -->shape: torch.Size([1024, 2048])
+-->name: transformer.layers.0.1.fn.net.3.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.1.0.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.1.0.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.1.0.fn.to_qkv.weight -->grad_requirs: True  -->shape: torch.Size([3072, 1024])
+-->name: transformer.layers.1.0.fn.to_out.0.weight -->grad_requirs: True  -->shape: torch.Size([1024, 1024])
+-->name: transformer.layers.1.0.fn.to_out.0.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.1.1.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.1.1.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.1.1.fn.net.0.weight -->grad_requirs: True  -->shape: torch.Size([2048, 1024])
+-->name: transformer.layers.1.1.fn.net.0.bias -->grad_requirs: True  -->shape: torch.Size([2048])
+-->name: transformer.layers.1.1.fn.net.3.weight -->grad_requirs: True  -->shape: torch.Size([1024, 2048])
+-->name: transformer.layers.1.1.fn.net.3.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.2.0.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.2.0.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.2.0.fn.to_qkv.weight -->grad_requirs: True  -->shape: torch.Size([3072, 1024])
+-->name: transformer.layers.2.0.fn.to_out.0.weight -->grad_requirs: True  -->shape: torch.Size([1024, 1024])
+-->name: transformer.layers.2.0.fn.to_out.0.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.2.1.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.2.1.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.2.1.fn.net.0.weight -->grad_requirs: True  -->shape: torch.Size([2048, 1024])
+-->name: transformer.layers.2.1.fn.net.0.bias -->grad_requirs: True  -->shape: torch.Size([2048])
+-->name: transformer.layers.2.1.fn.net.3.weight -->grad_requirs: True  -->shape: torch.Size([1024, 2048])
+-->name: transformer.layers.2.1.fn.net.3.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.3.0.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.3.0.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.3.0.fn.to_qkv.weight -->grad_requirs: True  -->shape: torch.Size([3072, 1024])
+-->name: transformer.layers.3.0.fn.to_out.0.weight -->grad_requirs: True  -->shape: torch.Size([1024, 1024])
+-->name: transformer.layers.3.0.fn.to_out.0.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.3.1.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.3.1.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.3.1.fn.net.0.weight -->grad_requirs: True  -->shape: torch.Size([2048, 1024])
+-->name: transformer.layers.3.1.fn.net.0.bias -->grad_requirs: True  -->shape: torch.Size([2048])
+-->name: transformer.layers.3.1.fn.net.3.weight -->grad_requirs: True  -->shape: torch.Size([1024, 2048])
+-->name: transformer.layers.3.1.fn.net.3.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.4.0.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.4.0.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.4.0.fn.to_qkv.weight -->grad_requirs: True  -->shape: torch.Size([3072, 1024])
+-->name: transformer.layers.4.0.fn.to_out.0.weight -->grad_requirs: True  -->shape: torch.Size([1024, 1024])
+-->name: transformer.layers.4.0.fn.to_out.0.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.4.1.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.4.1.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.4.1.fn.net.0.weight -->grad_requirs: True  -->shape: torch.Size([2048, 1024])
+-->name: transformer.layers.4.1.fn.net.0.bias -->grad_requirs: True  -->shape: torch.Size([2048])
+-->name: transformer.layers.4.1.fn.net.3.weight -->grad_requirs: True  -->shape: torch.Size([1024, 2048])
+-->name: transformer.layers.4.1.fn.net.3.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.5.0.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.5.0.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.5.0.fn.to_qkv.weight -->grad_requirs: True  -->shape: torch.Size([3072, 1024])
+-->name: transformer.layers.5.0.fn.to_out.0.weight -->grad_requirs: True  -->shape: torch.Size([1024, 1024])
+-->name: transformer.layers.5.0.fn.to_out.0.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.5.1.norm.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.5.1.norm.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: transformer.layers.5.1.fn.net.0.weight -->grad_requirs: True  -->shape: torch.Size([2048, 1024])
+-->name: transformer.layers.5.1.fn.net.0.bias -->grad_requirs: True  -->shape: torch.Size([2048])
+-->name: transformer.layers.5.1.fn.net.3.weight -->grad_requirs: True  -->shape: torch.Size([1024, 2048])
+-->name: transformer.layers.5.1.fn.net.3.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: mlp_head.0.weight -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: mlp_head.0.bias -->grad_requirs: True  -->shape: torch.Size([1024])
+-->name: mlp_head.1.weight -->grad_requirs: True  -->shape: torch.Size([2, 1024])
+-->name: mlp_head.1.bias -->grad_requirs: True  -->shape: torch.Size([2])
