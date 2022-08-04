@@ -5,9 +5,9 @@
 #include "utils/tensor.hpp"
 #include "utils/readNpyData.cpp"
 #include "kernel/rearrange.cpp"
-#include "kernel/linear.cpp"
 #include "kernel/slice.cpp"
-
+#include "kernel/repeat.cpp"
+#include "layer/linear.cpp"
 int main()
 {
     // Fake input image, just one image per batch
@@ -30,9 +30,10 @@ int main()
     std::vector<std::pair<int, int>> sliceMetric = {{0, 0}, {0, 1024}, {0, 3072}};
     auto slicedData = slice(rearrangedData, sliceMetric);
 
-    // slicedData->showData();
 
-
+    //##################################################
+    //to_patch_embedding.1
+    //##################################################
     std::string PATH_to_patch_embedding_1_weight = "to_patch_embedding.1.weight";
     std::string PATH_to_patch_embedding_1_bias = "to_patch_embedding.1.bias";
     
@@ -41,9 +42,30 @@ int main()
  
     auto DATA_to_patch_embedding_1_weight = readNpyData<double>(PATH_to_patch_embedding_1_weight, DIM_to_patch_embedding_1_weight);
     auto DATA_to_patch_embedding_1_bias = readNpyData<double>(PATH_to_patch_embedding_1_bias, DIM_to_patch_embedding_1_bias);
+    auto ANS_to_patch_embedding_1 = Linear(DATA_to_patch_embedding_1_weight, slicedData, DATA_to_patch_embedding_1_bias);
+    ANS_to_patch_embedding_1->showDimension();
 
 
-    Linear(DATA_to_patch_embedding_1_weight, slicedData, DATA_to_patch_embedding_1_bias);
+    //##################################################
+    //cls_token
+    //##################################################
+    std::string PATH_cls_token = "cls_token";
+    std::vector<int> DIM_cls_token = {1, 1, 1024};
+    auto DATA_cls_token = readNpyData<double>(PATH_cls_token, DIM_cls_token);
+
+    std::vector<std::pair<int, int>> SLICE_cls_token = {{0, 0}, {0, 1}, {0, 1024}};
+    auto DATA_cls_token_1 = slice(DATA_cls_token, SLICE_cls_token);
+
+    DATA_cls_token_1->showDimension();
+
+
+    // std::pair<int, int> repeatAt(0, 1);
+    // Repeat<double>(DATA_cls_token, repeatAt);
+
+
+
+
+
 
     // DATA_to_patch_embedding_1_weight->showData();
     // DATA_to_patch_embedding_1_bias->showData();

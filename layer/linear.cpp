@@ -1,6 +1,6 @@
 #pragma once
-#include "matmul.cpp"
-#include "addBias.cpp"
+#include "../kernel/matmul.cpp"
+#include "../kernel/addBias.cpp"
 #include "../utils/tensor.hpp"
 
 template<class T>

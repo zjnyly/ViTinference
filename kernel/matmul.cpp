@@ -21,6 +21,7 @@ Tensor<T> * matmul(Tensor<T> * matA, Tensor<T> * matB)
     auto B = matB->getDataPointer();
     auto C = matC->getDataPointer();
 
+#pragma omp parallel for
     for(auto k = 0; k < K; k++)
     {
         for(auto i = 0; i < I; i++)
