@@ -4,7 +4,7 @@
 #include "../utils/tensor.hpp"
 
 template<class T>
-Tensor<T> * Linear(Tensor<T> * weight, Tensor<T> * input, Tensor<T> * bias)
+Tensor<T> * Linear(Tensor<T> * weight, Tensor<T> * input, Tensor<T> * bias, bool haveBias = true)
 {
     // weight->showDimension();
     // input->showDimension();
@@ -22,6 +22,10 @@ Tensor<T> * Linear(Tensor<T> * weight, Tensor<T> * input, Tensor<T> * bias)
 
 
     auto ans = matmul(input, weight);
-    addBias(ans, bias);
+    if(haveBias)
+    {
+        addBias(ans, bias);
+    }
+    
     return ans;
 }

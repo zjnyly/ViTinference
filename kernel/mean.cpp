@@ -61,7 +61,7 @@ Tensor<T> * mean(Tensor<T> * originalData, int dim)
     {
         dim = originalData->getDimension().size() + dim;
     }
-    
+
     auto originalDimension = originalData->getDimension();
 
     std::vector<int> meanMatDim;
@@ -96,7 +96,7 @@ Tensor<T> * mean(Tensor<T> * originalData, int dim)
     performMean<T>(originalData->getDataPointer(), meanMat->getDataPointer(), originalDimension, meanMatIntevalTable, loopDepth, originalIdx, meanMatIdx, dim);
     // meanMat->showRawData();
 
-    return matdiv(meanMat, (T)originalDimension[dim]);
+    return matdiv(meanMat, (T)originalDimension[dim], false);
     
     // return rearrangedData;
 }

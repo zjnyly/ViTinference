@@ -38,7 +38,7 @@ Tensor<T> * variance(Tensor<T> * originalData, int dim)
     auto unbiasedFactor = (double)(originalDim[dim] - 1)/(originalDim[dim]);
 
     // std::cout<<unbiasedFactor<<std::endl;
-    auto unbiasedVar = matdiv<T>(biasdVar, unbiasedFactor);
+    auto unbiasedVar = matdiv<T>(biasdVar, unbiasedFactor, false);
 
     return unbiasedVar;
 

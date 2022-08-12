@@ -14,10 +14,11 @@
 #include "kernel/mean.cpp"
 #include "kernel/variance.cpp"
 #include "kernel/view.cpp"
-
+#include "kernel/chunk.cpp"
 
 #include "layer/linear.cpp"
 #include "layer/transformer.cpp"
+#include "layer/layerNorm.cpp"
 
 int main()
 {
@@ -92,17 +93,37 @@ int main()
     // std::cout<<"hi"<<std::endl;
 
     // ANS_to_patch_embedding_1->showDimension();
-    matadd<double>(concat_x, DATA_pos_embedding_1);
+    // x += self.pos_embedding[:, :(n + 1)]
+    auto DATA_x_plus_pos_embedding = matadd<double>(concat_x, DATA_pos_embedding_1);
 
 
 
     std::vector<int> testDim = {2, 3, 4};
     auto testData = new Tensor<double>(testDim, true);
+    chunk<double>(testData, 4, -1);
+
+
+    transformer<double>(DATA_x_plus_pos_embedding);
+
+
+    // layerNorm<double>(testData, -1);
+
     
-    testData->showRawData();
-    mean<double>(testData, -1);
-    variance<double>(testData, -1);
-    view<double>(testData, { -1, 2, 3, 1})->showDimension();
+    // layerNorm<double>();
+
+
+
+    
+    // testData->showRawData();
+    // auto meanData = mean<double>(testData, -1);
+    // // meanData->showDimension();
+    // auto viewData = view<double>(meanData, {2, 3, -1});
+    // viewData->showRawData();
+    // // std::cout<<"test"<<std::endl;
+    // matadd(testData, viewData, true)->showRawData();
+
+    // variance<double>(testData, -1);
+    // view<double>(testData, { -1, 2, 3, 1})->showDimension();
 
 
     
