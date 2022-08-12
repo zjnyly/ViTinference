@@ -6,7 +6,7 @@ template <class T>
 class Tensor
 {
 public:
-    Tensor(std::vector<int> & _dimension)
+    Tensor(std::vector<int> &_dimension, bool forTest = false)
     {
         // store the dimension
         this->dimension = _dimension;
@@ -17,27 +17,37 @@ public:
         // }
 
         // calculate the size
-        for(auto & dim : _dimension)
+        for (auto &dim : _dimension)
         {
             this->size *= dim;
         }
 
         // allocate the data buffer for data
         this->data = new T[this->size];
-        
-        for(auto i = 0; i < this->size; i++)
+
+        if (forTest)
         {
-            this->data[i] = i;
+            for (auto i = 0; i < this->size; i++)
+            {
+                this->data[i] = i;
+            }
+        }
+        else
+        {
+            for (auto i = 0; i < this->size; i++)
+            {
+                this->data[i] = 0;
+            }
         }
     }
 
-    Tensor(std::vector<T> & _data, std::vector<int> & _dimension)
+    Tensor(std::vector<T> &_data, std::vector<int> &_dimension)
     {
         // store the dimension
         this->dimension = _dimension;
 
         // calculate the size
-        for(auto & dim : _dimension)
+        for (auto &dim : _dimension)
         {
             this->size *= dim;
         }
@@ -45,13 +55,33 @@ public:
         // allocate the data buffer for data
         this->data = new T[this->size];
 
-        for(int i = 0; i < size; i++)
+        for (int i = 0; i < size; i++)
         {
             this->data[i] = _data[i];
         }
     }
 
-    T * getDataPointer()
+    Tensor(T * _data, std::vector<int> &_dimension)
+    {
+        // store the dimension
+        this->dimension = _dimension;
+
+        // calculate the size
+        for (auto &dim : _dimension)
+        {
+            this->size *= dim;
+        }
+
+        // allocate the data buffer for data
+        this->data = new T[this->size];
+
+        for (int i = 0; i < size; i++)
+        {
+            this->data[i] = _data[i];
+        }
+    }
+
+    T *getDataPointer()
     {
         return this->data;
     }
@@ -68,34 +98,42 @@ public:
 
     void showDimension()
     {
-        std::cout<<"[";
-        for(int i = 0; i < this->dimension.size() - 1; i++)
+        std::cout << "[";
+        for (int i = 0; i < this->dimension.size() - 1; i++)
         {
-            std::cout<<" "<<this->dimension[i]<<",";
+            std::cout << " " << this->dimension[i] << ",";
         }
-        std::cout<<" "<<this->dimension[this->dimension.size() - 1];
-        std::cout<<"]"<<std::endl;
+        std::cout << " " << this->dimension[this->dimension.size() - 1];
+        std::cout << "]" << std::endl;
     }
 
     void showData()
     {
-        std::cout<<"HEAD>>>"<<std::endl;
-        for(int i = 0; i < std::min(this->size, 100ll); i++)
+        std::cout << "HEAD>>>" << std::endl;
+        for (int i = 0; i < std::min(this->size, 100ll); i++)
         {
-            std::cout<<this->data[i]<< " ";
+            std::cout << this->data[i] << " ";
         }
-        std::cout<<std::endl;
-        std::cout<<"TAIL<<<"<<std::endl;
-        for(int i = this->size - 1; i > std::max(this->size - 1 - 100, 0ll); i--)
+        std::cout << std::endl;
+        std::cout << "TAIL<<<" << std::endl;
+        for (int i = this->size - 1; i > std::max(this->size - 1 - 100, 0ll); i--)
         {
-            std::cout<<this->data[i]<< " ";
+            std::cout << this->data[i] << " ";
         }
-        std::cout<<std::endl;
+        std::cout << std::endl;
     }
 
+    void showRawData()
+    {
+        for (int i = 0; i < this->size; i++)
+        {
+            std::cout << this->data[i] << " ";
+        }
+        std::cout << std::endl;
+    }
 
 private:
-    T * data = nullptr;
+    T *data = nullptr;
     std::vector<int> dimension;
     long long size = 1;
 };

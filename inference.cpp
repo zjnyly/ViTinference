@@ -11,6 +11,10 @@
 #include "kernel/repeat.cpp"
 #include "kernel/concat.cpp"
 #include "kernel/matadd.cpp"
+#include "kernel/mean.cpp"
+#include "kernel/variance.cpp"
+#include "kernel/view.cpp"
+
 
 #include "layer/linear.cpp"
 #include "layer/transformer.cpp"
@@ -51,7 +55,7 @@ int main()
     auto DATA_to_patch_embedding_1_weight = readNpyData<double>(PATH_to_patch_embedding_1_weight, DIM_to_patch_embedding_1_weight);
     auto DATA_to_patch_embedding_1_bias = readNpyData<double>(PATH_to_patch_embedding_1_bias, DIM_to_patch_embedding_1_bias);
     auto ANS_to_patch_embedding_1 = Linear(DATA_to_patch_embedding_1_weight, slicedData, DATA_to_patch_embedding_1_bias);
-    ANS_to_patch_embedding_1->showDimension();
+    // ANS_to_patch_embedding_1->showDimension();
 
 
     //##################################################
@@ -69,7 +73,7 @@ int main()
     // DATA_cls_token_1->showDimension();
     // DATA_cls_token_1->showData();
 
-    auto concat_x = concat(DATA_cls_token_1, ANS_to_patch_embedding_1, 0);
+    auto concat_x = concat<double>(DATA_cls_token_1, ANS_to_patch_embedding_1, 0);
 
     // concat_x->showDimension();
 
@@ -82,13 +86,30 @@ int main()
     auto DATA_pos_embedding = readNpyData<double>(PATH_pos_embedding, DIM_pos_embedding);
 
     std::vector<std::pair<int, int>> SLICE_pos_embedding = {{0, 0}, {0, 50}, {0, 1024}};
-    std::cout<<"hi"<<std::endl;
+    // std::cout<<"hi"<<std::endl;
     // DATA_pos_embedding->showDimension();
     auto DATA_pos_embedding_1 = slice(DATA_pos_embedding, SLICE_pos_embedding);
-    std::cout<<"hi"<<std::endl;
+    // std::cout<<"hi"<<std::endl;
 
     // ANS_to_patch_embedding_1->showDimension();
-    matadd(concat_x, DATA_pos_embedding_1);
+    matadd<double>(concat_x, DATA_pos_embedding_1);
+
+
+
+    std::vector<int> testDim = {2, 3, 4};
+    auto testData = new Tensor<double>(testDim, true);
+    
+    testData->showRawData();
+    mean<double>(testData, -1);
+    variance<double>(testData, -1);
+    view<double>(testData, { -1, 2, 3, 1})->showDimension();
+
+
+    
+
+    
+
+
 
     // No need for dropout
 
