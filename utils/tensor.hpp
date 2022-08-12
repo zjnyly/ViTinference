@@ -24,6 +24,11 @@ public:
 
         // allocate the data buffer for data
         this->data = new T[this->size];
+        
+        for(auto i = 0; i < this->size; i++)
+        {
+            this->data[i] = i;
+        }
     }
 
     Tensor(std::vector<T> & _data, std::vector<int> & _dimension)

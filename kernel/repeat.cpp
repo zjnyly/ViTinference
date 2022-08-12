@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include "../utils/tensor.hpp"
+#include "../utils/utils.cpp"
 
 
 
@@ -47,31 +48,6 @@ void performRepeat(
     }
 }
 
-std::vector<int> getIntevalTable(std::vector<int> & dimension)
-{
-    std::vector<int> intevalTable;
-
-    long long index = 1;
-
-    for(int i = dimension.size() - 1; i >= 0; i--)
-    {
-        intevalTable.push_back(index);
-        index *= dimension[i];
-    }
-
-
-    // for(auto i = 0; i < dimension.size(); i ++)
-    // {
-    //     std::cout<<dimension[i]<<std::endl;
-    // }
-
-    // for(auto i = 0; i < dimension.size(); i ++)
-    // {
-    //     std::cout<<intevalTable[i]<<std::endl;
-    // }
-
-    return intevalTable;
-}
 
 template<class T>
 Tensor<T> * Repeat(Tensor<T> * input, std::pair<int, int> & repeatAt)

@@ -2,12 +2,19 @@
 #include <string>
 #include <vector>
 #include <map>
+
 #include "utils/tensor.hpp"
 #include "utils/readNpyData.cpp"
+
 #include "kernel/rearrange.cpp"
 #include "kernel/slice.cpp"
 #include "kernel/repeat.cpp"
+#include "kernel/concat.cpp"
+#include "kernel/matadd.cpp"
+
 #include "layer/linear.cpp"
+#include "layer/transformer.cpp"
+
 int main()
 {
     // Fake input image, just one image per batch
@@ -15,20 +22,21 @@ int main()
     auto inputData = new Tensor<double>(inputDataDimension);
 
 
-    
-
-    // inputData->showDimension();
+    // inputData->showData();
 
     // Then reshape the image from dim [1, 3, 224, 224] to [1, 1024, 3072]
     std::vector<std::pair<std::string, int>> originalView = {{"b", 1}, {"c", 3}, {"h", 7}, {"p1", 32}, {"w", 7}, {"p2", 32}};
     std::vector<int> originalDimension = {1, 3, 7, 32, 7, 32};
     std::vector<std::pair<std::string, int>> rearrangedView = {{"b", 1}, {"h", 7}, {"w", 7}, {"p1", 32}, {"p2", 32}, {"c", 3}};
-    std::vector<int> rearrangedDimension = {1, 1024, 3072};
+    std::vector<int> rearrangedDimension = {1, 49, 3072};
     auto rearrangedData = rearrange<double>(inputData, originalView, rearrangedView, originalDimension, rearrangedDimension);
     // rearrangedData->showDimension();
 
-    std::vector<std::pair<int, int>> sliceMetric = {{0, 0}, {0, 1024}, {0, 3072}};
+    std::vector<std::pair<int, int>> sliceMetric = {{0, 0}, {0, 49}, {0, 3072}};
+
+    // rearrangedData->showData();
     auto slicedData = slice(rearrangedData, sliceMetric);
+    // slicedData->showData();
 
 
     //##################################################
@@ -53,10 +61,43 @@ int main()
     std::vector<int> DIM_cls_token = {1, 1, 1024};
     auto DATA_cls_token = readNpyData<double>(PATH_cls_token, DIM_cls_token);
 
+    // DATA_cls_token->showData();
+
     std::vector<std::pair<int, int>> SLICE_cls_token = {{0, 0}, {0, 1}, {0, 1024}};
     auto DATA_cls_token_1 = slice(DATA_cls_token, SLICE_cls_token);
 
-    DATA_cls_token_1->showDimension();
+    // DATA_cls_token_1->showDimension();
+    // DATA_cls_token_1->showData();
+
+    auto concat_x = concat(DATA_cls_token_1, ANS_to_patch_embedding_1, 0);
+
+    // concat_x->showDimension();
+
+
+
+    // x += self.pos_embedding[:, :(n + 1)]
+
+    std::string PATH_pos_embedding = "pos_embedding";   
+    std::vector<int> DIM_pos_embedding = {1, 50, 1024};
+    auto DATA_pos_embedding = readNpyData<double>(PATH_pos_embedding, DIM_pos_embedding);
+
+    std::vector<std::pair<int, int>> SLICE_pos_embedding = {{0, 0}, {0, 50}, {0, 1024}};
+    std::cout<<"hi"<<std::endl;
+    // DATA_pos_embedding->showDimension();
+    auto DATA_pos_embedding_1 = slice(DATA_pos_embedding, SLICE_pos_embedding);
+    std::cout<<"hi"<<std::endl;
+
+    // ANS_to_patch_embedding_1->showDimension();
+    matadd(concat_x, DATA_pos_embedding_1);
+
+    // No need for dropout
+
+
+
+    
+
+
+    
 
 
     // std::pair<int, int> repeatAt(0, 1);

@@ -1,10 +1,8 @@
 #pragma once
-#include "../kernel/matmul.cpp"
-#include "../kernel/addBias.cpp"
 #include "../utils/tensor.hpp"
 
 template<class T>
-Tensor<T> * Linear(Tensor<T> * weight, Tensor<T> * input, Tensor<T> * bias)
+Tensor<T> * Transformer(Tensor<T> * weight, Tensor<T> * input, Tensor<T> * bias)
 {
     // weight->showDimension();
     // input->showDimension();
