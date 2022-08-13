@@ -6,14 +6,6 @@
 
 enum OP {ADD, MINUS, PRODUCT, DIV, POW};
 
-// template <class T>
-// Tensor<T> * matadd(T * matA, T * matB, OP opcode)
-// {
-
-// }
-
-
-
 template <class T>
 Tensor<T> * matadd(Tensor<T> *matA, Tensor<T> *matB, bool minus = false)
 {
@@ -29,13 +21,8 @@ Tensor<T> * matadd(Tensor<T> *matA, Tensor<T> *matB, bool minus = false)
     auto B = matB->getDataPointer();
     auto C = matC->getDataPointer();
 
-    
-    // matA->showDimension();
-    // matB->showDimension();
     auto div = getDiv(matADimension, matBDimension);
     auto mod = getMod(matADimension, matBDimension);
-
-    // std::cout<<"ha"<<div<<std::endl;
 
     if (div == -1)
     {

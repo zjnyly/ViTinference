@@ -26,16 +26,13 @@ Tensor<T> *matdiv(Tensor<T> *matA, T divident, bool mult)
     else
     {
 #pragma omp parallel for
-    
+
         for (auto i = 0; i < size; i++)
         {
             B[i] = A[i] / divident;
         }
     }
 
-    // matA->showData();
-    // matB->showData();
-    // matC->showData();
     return matB;
 }
 
@@ -52,21 +49,13 @@ Tensor<T> *matdiv(Tensor<T> *matA, Tensor<T> *matB, bool multi = false)
     auto B = matB->getDataPointer();
     auto C = matC->getDataPointer();
 
-    // matA->showDimension();
-    // matB->showDimension();
-
-    // for broadcast
     auto div = getDiv(matADimension, matBDimension);
     auto mod = getMod(matADimension, matBDimension);
-
-    // std::cout<<"ha"<<div<<std::endl;
 
     if (div == -1)
     {
         div = matA->getDataSize();
     }
-
-    // std::cout<<"ha"<<div<<std::endl;
 
     if (multi)
     {
@@ -76,7 +65,6 @@ Tensor<T> *matdiv(Tensor<T> *matA, Tensor<T> *matB, bool multi = false)
         {
 
             C[i] = A[i] * B[i / div + i % mod];
-            // std::cout<<B[i / div + i % mod]<<" ";
         }
     }
     else

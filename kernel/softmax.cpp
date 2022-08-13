@@ -10,49 +10,6 @@
 #include "../utils/utils.cpp"
 #include "matdiv.cpp"
 
-// template <class T>
-// void performSoftmax(
-//     T * originalData,
-//     T * meanMatData,
-//     std::vector<int> & originalDimension,
-//     std::vector<int> & meanMatIntevalTable,
-//     int & loopDepth,
-//     int & originalIdx,
-//     int & meanMatIdx,
-//     int & dim)
-// {
-//     if(loopDepth == originalDimension.size())
-//     {
-//         meanMatData[meanMatIdx] += originalData[originalIdx];
-//         // std::cout<<originalIdx<<" "<<meanMatIdx<< std::endl;
-//         originalIdx += 1;
-
-//         return;
-//     }
-
-//     for(int i = 0; i < originalDimension[loopDepth]; i++)
-//     {
-//         auto increment = 0;
-//         if(loopDepth != dim)
-//         {
-//             if(loopDepth > dim)
-//             {
-//                 increment = i * meanMatIntevalTable[loopDepth - 1];
-//             }
-//             else
-//             {
-//                 increment = i * meanMatIntevalTable[loopDepth];
-//             }
-
-//         }
-
-//         loopDepth += 1;
-//         meanMatIdx += increment;
-//         performMean<T>(originalData, meanMatData, originalDimension, meanMatIntevalTable, loopDepth, originalIdx, meanMatIdx, dim);
-//         loopDepth -= 1;
-//         meanMatIdx -= increment;
-//     }
-// }
 
 template <class T>
 Tensor<T> *softmax(Tensor<T> *originalData, int dim)
@@ -84,7 +41,6 @@ Tensor<T> *softmax(Tensor<T> *originalData, int dim)
 
         originalData->showDimension();
         originalDimension = rearrangedDimension;
-        // reshapedData->showDimension();
     }
 
     auto softmaxMat = new Tensor<T>(originalDimension);
@@ -101,7 +57,6 @@ Tensor<T> *softmax(Tensor<T> *originalData, int dim)
     {
 
         auto alpha = *std::max_element(originalDataPointer + i * innerSize, originalDataPointer + (i + 1) * innerSize);
-        // std::cout<<alpha<<std::endl;
         T denominator{0};
         for(auto j = 0; j < innerSize; j++)
         {
@@ -118,40 +73,4 @@ Tensor<T> *softmax(Tensor<T> *originalData, int dim)
     }
 
     return softmaxMat;
-
-    // softmaxMat->showRawData();
-
-    // originalData->showData();
-    // reshapedData->showData();
-
-    // dim = getIdx<T>(originalData, dim);
-
-    // auto originalDimension = originalData->getDimension();
-
-    // std::vector<int> softmaxMatDim;
-
-    // for(auto i = 0; i < originalDimension.size(); i++)
-    // {
-    //     if(i != dim)
-    //     {
-    //         softmaxMatDim.push_back(originalDimension[i]);
-    //     }
-    // }
-    // // Second, allocate a new buffer for the rearranged data
-    // auto softmaxMat = new Tensor<T>(softmaxMatDim);
-
-    // auto softmaxMatIntevalTable = getIntevalTable(softmaxMatDim);
-
-    // int loopDepth = 0;
-    // int softmaxMatIdx = 0;
-    // int originalIdx = 0;
-    // vector<T>buffer(originalDimension[dim]);
-
-    // // originalData->showRawData();
-    // performMean<T>(originalData->getDataPointer(), softmaxMat->getDataPointer(), originalDimension, softmaxMatIntevalTable, loopDepth, originalIdx, softmaxMatIdx, dim);
-    // // meanMat->showRawData();
-
-    // return matdiv(meanMat, (T)originalDimension[dim], false);
-
-    // return rearrangedData;
 }

@@ -23,23 +23,13 @@ Tensor<T> * variance(Tensor<T> * originalData, int dim)
         dim = originalDim.size() + dim;
     }
     
-    // originalData->showRawData();
     auto X2 = matpow<T>(originalData, 2);
-    // X2->showRawData();
     auto EX2 = mean<T>(X2, dim);
-    // EX2->showRawData();
     auto EX = mean<T>(originalData, dim);
-    // EX->showRawData();
     auto E2X = matpow<T>(EX, 2);
-    // E2X->showRawData();
     auto biasdVar = matadd<T>(EX2 , E2X, true);
-    // biasdVar->showRawData();
- 
     auto unbiasedFactor = (double)(originalDim[dim] - 1)/(originalDim[dim]);
-
-    // std::cout<<unbiasedFactor<<std::endl;
     auto unbiasedVar = matdiv<T>(biasdVar, unbiasedFactor, false);
-
     return unbiasedVar;
 
 }

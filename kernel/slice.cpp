@@ -16,11 +16,6 @@ Tensor<T> *allocateTensor(std::vector<std::pair<int, int>> &sliceMetric)
             dimension.push_back(dim);
         }
     }
-
-    // for(auto i = 0; i < dimension.size(); i++)
-    // {
-    //     std::cout<<dimension[i]<<std::endl;
-    // }
     return new Tensor<T>(dimension);
 }
 
@@ -39,7 +34,6 @@ void performSlice(
     {
         slicedData[originalIdx] = originalData[slicedIdx];
         originalIdx += 1;
-        // std::cout<<slicedIdx<<std::endl;
         return;
     }
     if (sliceMetric[loopDepth].first == sliceMetric[loopDepth].second)
@@ -55,7 +49,6 @@ void performSlice(
     {
         for (int i = sliceMetric[loopDepth].first; i < sliceMetric[loopDepth].second; i++)
         {
-            // std::cout << "1";
             auto increment = i * variableInteval[loopDepth];
             loopDepth += 1;
             slicedIdx += increment;
@@ -85,20 +78,11 @@ Tensor<T> *slice(Tensor<T> *input, std::vector<std::pair<int, int>> &sliceMetric
 
     reverse(variableInteval.begin(), variableInteval.end());
 
-    // for(auto & num : variableInteval)
-    // {
-    //     std::cout<< num << std::endl;
-    // }
-
-    // Perform rearrange
     int loopDepth = 0;
     int originalIdx = 0;
     int slicedIdx = 0;
 
     performSlice(input->getDataPointer(), output->getDataPointer(), sliceMetric, variableInteval, loopDepth, originalIdx, slicedIdx);
-
-    // input->showData();
-    // input->showDimension();
-
+    
     return output;
 }

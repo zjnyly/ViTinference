@@ -8,9 +8,6 @@
 
 #include "../utils/tensor.hpp"
 
-// Rearrange('b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = patch_height, p2 = patch_width),
-
-
 long long calculateIndex();
 template <class T>
 void performRearrange(
@@ -49,8 +46,7 @@ Tensor<T> * rearrange(
     std::vector<int> & originalDimension, 
     std::vector<int> & rearrangedDimension)
 {
-    // First recalculate the index inteval of for the originalView indexing variables
-    
+
     std::map<std::string, int> variableIntevalTable;
     long long inteval = 1;
     for(auto iter = rearrangedView.rbegin(); iter != rearrangedView.rend(); iter++)
@@ -60,18 +56,14 @@ Tensor<T> * rearrange(
         inteval *= (*iter).second;
     }
 
-    // Fill originalView with the variable inteval
 
     for(auto i = 0; i < originalView.size(); i++)
     {
         originalView[i].second = variableIntevalTable[originalView[i].first];
     }
 
-    // Second, allocate a new buffer for the rearranged data
     auto rearrangedData = new Tensor<T>(rearrangedDimension);
 
-
-    // Perform rearrange
     int loopDepth = 0;
     int originalIdx = 0;
     int rearrangedIdx = 0;

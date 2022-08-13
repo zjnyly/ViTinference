@@ -6,7 +6,6 @@
 #include "../utils/utils.cpp"
 
 
-
 template <class T>
 void performRepeat(
     T * originalData, 
@@ -21,21 +20,13 @@ void performRepeat(
 {
     if(loopDepth == repeatDimension.size())
     {
-        
         repeatedData[repeatedIdx] = originalData[originalIdx];
-        // repeatedData[repeatedIdx];
-        // originalData[originalIdx];
-        // std::cout<<originalIdx<<std::endl;
-        // std::cout<<repeatedIdx<<std::endl;
-
-
         return;
     }
 
     for(int i = 0; i < repeatDimension[repeatDimension.size() - 1 - loopDepth]; i++)
     {
         auto repeatIncrement = i * repeatIntevalTable[loopDepth];
-        // std::cout<<i << " " << originalDimension[loopDepth]<< " "<<i % originalDimension[loopDepth]<<  std::endl;
         auto originalIncrement = (i % originalDimension[repeatDimension.size() - 1 - loopDepth]) * originalIntevalTable[loopDepth];
 
         loopDepth += 1;
@@ -70,17 +61,5 @@ Tensor<T> * Repeat(Tensor<T> * input, std::pair<int, int> & repeatAt)
     int repeatedIdx = 0;
 
     performRepeat(input->getDataPointer(), repeatedTensor->getDataPointer(), originalDimension, repeatDimension, originalIntevalTable, repeatIntevalTable, loopDepth, originalIdx, repeatedIdx);
-
-//     performRepeat(
-//     T * originalData, 
-//     T * repeatedData, 
-//     std::vector<int> & originalDimension,
-//     std::vector<int> & repeatDimension,
-//     std::vector<int> & originalIntevalTable,
-//     std::vector<int> & repeatIntevalTable,
-//     int & loopDepth,
-//     int & originalIdx,
-//     int & repeatedIdx)
-// {
 
 }

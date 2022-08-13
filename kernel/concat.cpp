@@ -5,7 +5,6 @@
 #include "../utils/tensor.hpp"
 #include "../utils/utils.cpp"
 
-// enum currentMat {A, B};
 
 template <class T>
 void performConcat(
@@ -21,7 +20,6 @@ void performConcat(
     if(loopDepth == originalDim.size())
     {
         concatedData[concatIndex] = originalData[originalIndex];
-        // std::cout<<concatIndex<<std::endl;
         originalIndex++;
         return;
     }
@@ -60,7 +58,6 @@ void performSimpleConcat(Tensor<T> *matA, Tensor<T> *matB,  Tensor<T> *concatTen
 template <class T>
 Tensor<T> * concat(Tensor<T> *matA, Tensor<T> *matB, int dim)
 {
-
     auto matADim = matA->getDimension();
     auto matBDim = matB->getDimension();
 
@@ -73,7 +70,6 @@ Tensor<T> * concat(Tensor<T> *matA, Tensor<T> *matB, int dim)
         concatDimGap.push_back({0, matADim[i]});
     }
 
-    // std::cout<<concatDimGap[0].first<< " "<< concatDimGap[0].second<<std::endl;
 
     newMatDim[dim] += matBDim[dim];
 
@@ -82,13 +78,6 @@ Tensor<T> * concat(Tensor<T> *matA, Tensor<T> *matB, int dim)
 
     auto concatIntevalTable = getIntevalTable(concatDim);
 
-    // for(int i = 0; i < concatIntevalTable.size(); i++)
-    // {
-    //     std::cout<<matAIntevalTable[i]<<std::endl;
-    // }
-
-
-    // performSimpleConcat(matA, matB, concatTensor);
 
     int loopDepth = 0;
     int originalIdx = 0;
@@ -123,16 +112,6 @@ Tensor<T> * concat(Tensor<T> *matA, Tensor<T> *matB, int dim)
 
     return concatTensor;
 
-    // matB->showData();
-    // concatTensor->showData();
-    // T * originalData, 
-    // T * concatedData,
-    // std::vector<int> & originalDim,
-    // std::vector<std::pair<int, int>> & concatDim,
-    // std::vector<int> & originalIntevalTable,
-    // std::vector<int> & concatIntevalTable,
-    // int & loopDepth,
-    // int & originalIndex,
-    // int & concatIndex)
+
     
 }
