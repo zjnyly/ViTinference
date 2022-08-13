@@ -29,7 +29,7 @@ public:
         {
             for (auto i = 0; i < this->size; i++)
             {
-                this->data[i] = i;
+                this->data[i] = (T)i / this->size;
             }
         }
         else

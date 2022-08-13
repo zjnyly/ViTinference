@@ -1,6 +1,8 @@
 #pragma once
 #include "../kernel/matmul.cpp"
 #include "../kernel/addBias.cpp"
+#include "../kernel/transpose.cpp"
+
 #include "../utils/tensor.hpp"
 
 template<class T>
@@ -20,8 +22,12 @@ Tensor<T> * Linear(Tensor<T> * weight, Tensor<T> * input, Tensor<T> * bias, bool
 
     // addBias(matmul(test, test), test_);
 
-
+    weight = transpose<double>(weight, -2, -1);
+    // weight->showRawData();
+    // input->showRawData();
     auto ans = matmul(input, weight);
+
+    // ans->showRawData();
     if(haveBias)
     {
         addBias(ans, bias);

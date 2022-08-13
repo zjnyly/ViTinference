@@ -28,7 +28,7 @@
 
 
 template<class T>
-Tensor<T> * layerNorm(Tensor<T> * data, int dim, int layer, int idx)
+Tensor<T> * layerNorm(Tensor<T> * data, int dim, std::string PATH_layers_norm_weight, std::string PATH_layers_norm_bias, std::vector<int> DIM_norm_weight, std::vector<int> DIM_norm_bias)
 {
     dim = getIdx<T>(data, dim);
 
@@ -48,20 +48,20 @@ Tensor<T> * layerNorm(Tensor<T> * data, int dim, int layer, int idx)
     auto norm = matdiv<T>(numerator, denomenator, false);
 
 
-    std::string PATH_transformer_layers_norm_weight = "transformer.layers." +  std::to_string(layer) + "." +  std::to_string(idx) + ".norm.weight";
-    std::string PATH_transformer_layers_norm_bias = "transformer.layers." +  std::to_string(layer) + "." +  std::to_string(idx) + ".norm.bias";
+    // std::string PATH_transformer_layers_norm_weight = "transformer.layers." +  std::to_string(layer) + "." +  std::to_string(idx) + ".norm.weight";
+    // std::string PATH_transformer_layers_norm_bias = "transformer.layers." +  std::to_string(layer) + "." +  std::to_string(idx) + ".norm.bias";
     
     // std::cout<<PATH_transformer_layers_norm_weight<<std::endl;
-    std::vector<int> DIM_transformer_layers_norm_weight = {1024};
-    std::vector<int> DIM_transformer_layers_norm_bias = {1024};
+    // std::vector<int> DIM_transformer_layers_norm_weight = {1024};
+    // std::vector<int> DIM_transformer_layers_norm_bias = {1024};
 
-    auto DATA_transformer_layers_norm_weight = readNpyData<double>(PATH_transformer_layers_norm_weight, DIM_transformer_layers_norm_weight);
-    auto DATA_transformer_layers_norm_bias = readNpyData<double>(PATH_transformer_layers_norm_bias, DIM_transformer_layers_norm_bias);
+    auto DATA_transformer_layers_norm_weight = readNpyData<double>(PATH_layers_norm_weight, DIM_norm_weight);
+    auto DATA_transformer_layers_norm_bias = readNpyData<double>(PATH_layers_norm_bias, DIM_norm_bias);
  
     // DATA_transformer_layers_norm_weight->showRawData();
     // DATA_transformer_layers_norm_bias->showRawData();
     // DATA_transformer_layers_norm_weight;
-    auto DATA_transformer_layers_norm_weight_reshape = view<T>(DATA_transformer_layers_norm_weight, {1, 1024});
+    auto DATA_transformer_layers_norm_weight_reshape = view<T>(DATA_transformer_layers_norm_weight, {1, DIM_norm_weight[0]});
 
     // for(int i = 0; i < 1024;i++)
     // {
@@ -71,7 +71,7 @@ Tensor<T> * layerNorm(Tensor<T> * data, int dim, int layer, int idx)
     auto affine = matdiv<T>(norm, DATA_transformer_layers_norm_weight_reshape, true);
     // affine->showDimension();
 
-    auto DATA_transformer_layers_norm_bias_reshape = view<T>(DATA_transformer_layers_norm_bias, {1, 1024});
+    auto DATA_transformer_layers_norm_bias_reshape = view<T>(DATA_transformer_layers_norm_bias, {1, DIM_norm_bias[0]});
 
     auto addBias = matadd<T>(affine, DATA_transformer_layers_norm_bias_reshape);
     // addBias->showDimension();

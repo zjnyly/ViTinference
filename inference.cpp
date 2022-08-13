@@ -19,15 +19,19 @@
 #include "layer/linear.cpp"
 #include "layer/transformer.cpp"
 #include "layer/layerNorm.cpp"
+#include "layer/mlp.cpp"
 
 int main()
 {
     // Fake input image, just one image per batch
     std::vector<int> inputDataDimension = {1, 3, 224, 224};
-    auto inputData = new Tensor<double>(inputDataDimension);
+    auto inputData = new Tensor<double>(inputDataDimension, true);
 
 
-    // inputData->showData();
+
+
+    // inputData->showRawData();
+    // std::cout<<inputData->getDataSize()<<std::endl;
 
     // Then reshape the image from dim [1, 3, 224, 224] to [1, 1024, 3072]
     std::vector<std::pair<std::string, int>> originalView = {{"b", 1}, {"c", 3}, {"h", 7}, {"p1", 32}, {"w", 7}, {"p2", 32}};
@@ -55,6 +59,8 @@ int main()
  
     auto DATA_to_patch_embedding_1_weight = readNpyData<double>(PATH_to_patch_embedding_1_weight, DIM_to_patch_embedding_1_weight);
     auto DATA_to_patch_embedding_1_bias = readNpyData<double>(PATH_to_patch_embedding_1_bias, DIM_to_patch_embedding_1_bias);
+
+ 
     auto ANS_to_patch_embedding_1 = Linear(DATA_to_patch_embedding_1_weight, slicedData, DATA_to_patch_embedding_1_bias);
     // ANS_to_patch_embedding_1->showDimension();
 
@@ -98,12 +104,29 @@ int main()
 
 
 
-    std::vector<int> testDim = {2, 3, 4};
-    auto testData = new Tensor<double>(testDim, true);
-    chunk<double>(testData, 4, -1);
+    // std::vector<int> testDim = {2, 3, 4};
+    // auto testData = new Tensor<double>(testDim, true);
+    // chunk<double>(testData, 4, -1);
 
 
-    transformer<double>(DATA_x_plus_pos_embedding);
+    auto datan = transformer<double>(DATA_x_plus_pos_embedding, 1);
+
+    // datan->showDimension();
+
+    // x[:, 0]
+
+    std::vector<std::pair<int, int>> SLICE_datan = {{0, 1}, {0, 1024}};
+
+    auto datax = slice(datan, SLICE_datan);
+    datax->showDimension();
+
+    mlp<double>(datax)->showRawData();
+    
+
+
+
+
+    
 
 
     // layerNorm<double>(testData, -1);

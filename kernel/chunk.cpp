@@ -27,9 +27,10 @@ Tensor<T> ** chunk(Tensor<T> * data, int pieces, int dim)
     {
         sliceMetric[dim].first = i * chunkSize;
         sliceMetric[dim].second = (i + 1) * chunkSize;
-        chunks[i] = new Tensor<T>(chunkDim);
-        slice<T>(data, sliceMetric)->showRawData();
+        // chunks[i] = new Tensor<T>(chunkDim);
+        chunks[i] = slice<T>(data, sliceMetric);
     }
     // std::vector<std::pair<int, int>> SLICE_pos_embedding = {{0, 0}, {0, 50}, {0, 1024}};
     // auto DATA_pos_embedding_1 = slice(DATA_pos_embedding, SLICE_pos_embedding);
+    return chunks;
 }
