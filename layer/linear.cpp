@@ -12,12 +12,16 @@ Tensor<T> * Linear(Tensor<T> * input, std::string PATH_weight, std::string PATH_
 {
     auto weight = readNpyData<double>(PATH_weight, DIM_weight);    
 
+    // weight->showData();
+
     weight = transpose<double>(weight, -2, -1);
     auto ans = matmul(input, weight);
     if(haveBias)
     {
         auto bias = readNpyData<double>(PATH_bias, DIM_bias);
+        // bias->showData();
         addBias(ans, bias);
     }
+
     return ans;
 }

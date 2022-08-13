@@ -13,8 +13,11 @@ Tensor<T> *matmul(Tensor<T> *matA, Tensor<T> *matB)
     auto J = matADim[matADim.size() - 1];
     auto K = matBDim[matBDim.size() - 1];
 
+    auto GAPA = I * J;
+    auto GAPB = J * K;
+    auto GAPC = I * K;
+
     auto N = 1;
-    auto GAP = I * K;
     for (auto i = 0; i < matCDim.size() - 2; i++)
     {
         N *= matCDim[i];
@@ -27,6 +30,7 @@ Tensor<T> *matmul(Tensor<T> *matA, Tensor<T> *matB)
     auto B = matB->getDataPointer();
     auto C = matC->getDataPointer();
 
+    // std::cout<<N<<std::endl;
     for (auto n = 0; n < N; n++)
     {
 #pragma omp parallel for
@@ -36,7 +40,7 @@ Tensor<T> *matmul(Tensor<T> *matA, Tensor<T> *matB)
             {
                 for (auto j = 0; j < J; j++)
                 {
-                    C[n * GAP + i * K + k] += A[n * GAP + i * J + j] * B[n * GAP + k * J + j];
+                    C[n * GAPC + i * K + k] += A[n * GAPA + i * J + j] * B[n * GAPB + j * K + k];
                 }
             }
         }

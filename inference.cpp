@@ -11,9 +11,23 @@ int main()
     //////////////////////////////////
     auto ans = ViT<double>(inputData);
     //////////////////////////////////
+    
+    // ans->showRawData();
+    
+    auto lables = ans->getDataPointer();
 
-    std::cout<<"猫  狗"<<std::endl;
-    ans->showRawData();
+    std::cout<<"我猜是";
+
+    if(lables[0] > lables[1])
+    {
+        std::cout<<"猫"<<std::endl;
+    }
+    else
+    {
+        std::cout<<"狗"<<std::endl;
+    }
+
+    
     return 0;
 }
 

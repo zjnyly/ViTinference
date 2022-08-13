@@ -35,6 +35,9 @@ Tensor<T> *ViT(Tensor<T> *inputData)
     std::vector<std::pair<int, int>> sliceMetric = {{0, 0}, {0, 49}, {0, 3072}};
     auto out_1 = slice(rearrangedData, sliceMetric);
 
+    // rearrangedData->showData();
+    // out_1->showDimension();
+    // out_1->showData();
 
     //####################################################################################################
     // Rearrange('b c (h p1) (w p2) -> b (h w) (p1 p2 c)', p1 = patch_height, p2 = patch_width),
@@ -45,6 +48,7 @@ Tensor<T> *ViT(Tensor<T> *inputData)
     std::vector<int> DIM_to_patch_embedding_1_bias = {1024};
     auto out_2 = Linear(out_1, PATH_to_patch_embedding_1_weight, PATH_to_patch_embedding_1_bias, DIM_to_patch_embedding_1_weight, DIM_to_patch_embedding_1_bias, true);
 
+    // out_2->showData();
 
     //####################################################################################################
     // repeat(self.cls_token, '1 1 d -> b 1 d', b = b)
@@ -52,16 +56,17 @@ Tensor<T> *ViT(Tensor<T> *inputData)
     std::string PATH_cls_token = "cls_token";
     std::vector<int> DIM_cls_token = {1, 1, 1024};
     auto DATA_cls_token = readNpyData<double>(PATH_cls_token, DIM_cls_token);
-
     std::vector<std::pair<int, int>> SLICE_cls_token = {{0, 0}, {0, 1}, {0, 1024}};
     auto DATA_cls_token_sliced = slice(DATA_cls_token, SLICE_cls_token);
 
+    // DATA_cls_token_sliced->showData();
 
     //####################################################################################################
     // torch.cat((cls_tokens, x), dim=1)
     //####################################################################################################
     auto out3 = concat<double>(DATA_cls_token_sliced, out_2, 0);
 
+    // out3->showData();
 
     //####################################################################################################
     // self.pos_embedding[:, :(n + 1)]
@@ -73,11 +78,14 @@ Tensor<T> *ViT(Tensor<T> *inputData)
     auto DATA_pos_embedding_1 = slice(DATA_pos_embedding, SLICE_pos_embedding);
     auto out4 = matadd<double>(out3, DATA_pos_embedding_1);
 
+    // out4->showData();
 
     //####################################################################################################
     // self.transformer(x)
     //####################################################################################################
     auto out5 = transformer<double>(out4, 1);
+
+    // out5->showData();
 
 
     //####################################################################################################
@@ -86,9 +94,14 @@ Tensor<T> *ViT(Tensor<T> *inputData)
     std::vector<std::pair<int, int>> SLICE_out5 = {{0, 1}, {0, 1024}};
     auto out6 = slice(out5, SLICE_out5);
 
+    // out6->showData();
 
     //####################################################################################################
     // self.mlp_head(x)
     //####################################################################################################
-    return mlp<double>(out6);
+    auto out7 = mlp<double>(out6);
+
+    // out7->showData();
+
+    return out7;
 }
