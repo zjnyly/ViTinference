@@ -22,6 +22,21 @@ Tensor<T> * readNpyData(std::string name, std::vector<int> & dimension)
     return weight;
 }
 
+template <class T>
+Tensor<T> * loadImage(std::string name, std::vector<int> & dimension)
+{
+
+    auto image = new Tensor<T>(dimension);
+
+    std::ifstream in(name, std::ios::in | std::ios::binary);
+
+    in.read((char * )image->getDataPointer(),  sizeof( T ) * image->getDataSize());
+
+    in.close();
+
+    return image;
+}
+
 
 
 
