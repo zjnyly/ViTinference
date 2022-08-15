@@ -11,11 +11,6 @@ public:
         // store the dimension
         this->dimension = _dimension;
 
-        // for(int i = 0; i < _dimension.size(); i++)
-        // {
-        //     this->dimension[i] = _dimension[i];
-        // }
-
         // calculate the size
         for (auto &dim : _dimension)
         {
@@ -79,6 +74,11 @@ public:
         {
             this->data[i] = _data[i];
         }
+    }
+
+    ~Tensor()
+    {
+        delete[] this->data;
     }
 
     T *getDataPointer()
