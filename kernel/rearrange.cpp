@@ -7,8 +7,9 @@
 #include <map>
 
 #include "../utils/tensor.hpp"
+#include "../utils/utils.cpp"
 
-long long calculateIndex();
+
 template <class T>
 void performRearrange(
     T * originalData, 
@@ -38,6 +39,38 @@ void performRearrange(
 }
 
 
+
+template <class T>
+void performRearrangeLoop(
+    T * originalData, 
+    T * rearrangedData, 
+    std::vector<int> & originalDimension,
+    std::vector<std::pair<std::string, int>> & variableIntevalTable,
+    int size)
+{
+    auto originalIntevalTable = getIntevalTable(originalDimension);
+    int dimsize = originalDimension.size() - 1;
+
+    for(int i = 0; i < size; i++)
+    {
+        int  rearrangedIdx = 0;
+        int  originalIdx = i;
+        // #pragma UNROLL(10)
+        for(int j =  dimsize; j >= 0; j--)
+        {
+            // std::cout<<j<<" "<<(originalIdx % originalDimension[j])<< " "<< variableIntevalTable[j].second<<std::endl;
+            rearrangedIdx += (originalIdx % originalDimension[j]) * variableIntevalTable[j].second;
+            originalIdx = originalIdx / originalDimension[j];
+        }
+        rearrangedData[rearrangedIdx] = originalData[i];
+        // originalData[i];
+
+        // std::cout<<i<< " " <<rearrangedIdx<<std::endl;
+    }
+}
+
+
+
 template <class T>
 Tensor<T> * rearrange(
     Tensor<T> * originalData, 
@@ -46,6 +79,7 @@ Tensor<T> * rearrange(
     std::vector<int> & originalDimension, 
     std::vector<int> & rearrangedDimension)
 {
+    
 
     std::map<std::string, int> variableIntevalTable;
     long long inteval = 1;
@@ -62,12 +96,26 @@ Tensor<T> * rearrange(
         originalView[i].second = variableIntevalTable[originalView[i].first];
     }
 
+    // for(auto i = 0; i < originalView.size(); i++)
+    // {
+    //     std::cout<<originalView[i].second<<std::endl;
+    // }
+
     auto rearrangedData = new Tensor<T>(rearrangedDimension);
 
     int loopDepth = 0;
     int originalIdx = 0;
     int rearrangedIdx = 0;
 
-    performRearrange<T>(originalData->getDataPointer(), rearrangedData->getDataPointer(), originalDimension, originalView, loopDepth, originalIdx, rearrangedIdx);
+    
+    clock_t start,end;
+    start=clock();
+    performRearrangeLoop<T>(originalData->getDataPointer(), rearrangedData->getDataPointer(), originalDimension, originalView, originalData->getDataSize());
+    // performRearrange<T>(originalData->getDataPointer(), rearrangedData->getDataPointer(), originalDimension, originalView, loopDepth, originalIdx, rearrangedIdx);
+    end = clock();
+    double endtime=(double)(end-start)/CLOCKS_PER_SEC;
+
+	// std::cout<<"Total time:"<<endtime * 1000<<"ms"<<std::endl;
+
     return rearrangedData;
 }

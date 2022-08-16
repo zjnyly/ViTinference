@@ -2,6 +2,7 @@
 #include <vector>
 #include "../utils/tensor.hpp"
 
+
 template <class T>
 Tensor<T> *addBias(Tensor<T> *mat, Tensor<T> *bias)
 {

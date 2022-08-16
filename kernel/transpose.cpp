@@ -9,6 +9,8 @@
 #include "../utils/tensor.hpp"
 #include "../utils/utils.cpp"
 
+
+
 template <class T>
 Tensor<T> * transpose(Tensor<T> * originalData, int dim1, int dim2)
 {

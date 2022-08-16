@@ -3,6 +3,8 @@
 #include <algorithm>
 #include "../utils/tensor.hpp"
 
+
+
 template <class T>
 Tensor<T> *allocateTensor(std::vector<std::pair<int, int>> &sliceMetric)
 {

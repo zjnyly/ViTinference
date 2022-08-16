@@ -14,23 +14,23 @@
 #include "mean.cpp"
 
 
-template <class T>
-Tensor<T> * view(Tensor<T> * originalData, std::vector<int>view)
-{  
-    auto size = originalData->getDataSize();
-    auto currentSize = 1;
-    for(auto i = 0; i < view.size(); i++)
+    template <class T>
+    Tensor<T> *view(Tensor<T> *originalData, std::vector<int> view)
     {
-        currentSize *= view[i];
-    }
-    currentSize = abs(currentSize);
-    for(auto i = 0; i < view.size(); i++)
-    {
-        if(view[i] < 0)
+        auto size = originalData->getDataSize();
+        auto currentSize = 1;
+        for (auto i = 0; i < view.size(); i++)
         {
-            view[i] = (int)size / currentSize;
+            currentSize *= view[i];
         }
+        currentSize = abs(currentSize);
+        for (auto i = 0; i < view.size(); i++)
+        {
+            if (view[i] < 0)
+            {
+                view[i] = (int)size / currentSize;
+            }
+        }
+        auto viewMat = new Tensor<T>(originalData->getDataPointer(), view);
+        return viewMat;
     }
-    auto viewMat = new Tensor<T>(originalData->getDataPointer(), view);
-    return viewMat;
-}

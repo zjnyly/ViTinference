@@ -5,6 +5,7 @@
 #include "../utils/utils.cpp"
 #include "slice.cpp"
 
+
 template <class T>
 Tensor<T> ** chunk(Tensor<T> * data, int pieces, int dim)
 {  

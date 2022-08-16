@@ -46,7 +46,7 @@ Tensor<T> *ViT(Tensor<T> *inputData)
     std::string PATH_to_patch_embedding_1_bias = "to_patch_embedding.1.bias";
     std::vector<int> DIM_to_patch_embedding_1_weight = {1024, 3072};
     std::vector<int> DIM_to_patch_embedding_1_bias = {1024};
-    auto out_2 = Linear(out_1, PATH_to_patch_embedding_1_weight, PATH_to_patch_embedding_1_bias, DIM_to_patch_embedding_1_weight, DIM_to_patch_embedding_1_bias, true);
+    auto out_2 = Linear<double>(out_1, PATH_to_patch_embedding_1_weight, PATH_to_patch_embedding_1_bias, DIM_to_patch_embedding_1_weight, DIM_to_patch_embedding_1_bias, true);
 
     // out_2->showData();
 
@@ -83,7 +83,9 @@ Tensor<T> *ViT(Tensor<T> *inputData)
     //####################################################################################################
     // self.transformer(x)
     //####################################################################################################
+    // auto out5 = transformer<double>(out4, 6);
     auto out5 = transformer<double>(out4, 1);
+
 
     // out5->showData();
 

@@ -13,7 +13,6 @@
 #include "mean.cpp"
 
 
-
 template <class T>
 Tensor<T> * variance(Tensor<T> * originalData, int dim)
 {  

@@ -2,6 +2,7 @@
 #include <vector>
 #include "../utils/tensor.hpp"
 
+
 template <class T>
 Tensor<T> *matmul(Tensor<T> *matA, Tensor<T> *matB)
 {

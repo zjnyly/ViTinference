@@ -6,6 +6,7 @@
 
 enum OP {ADD, MINUS, PRODUCT, DIV, POW};
 
+
 template <class T>
 Tensor<T> * matadd(Tensor<T> *matA, Tensor<T> *matB, bool minus = false)
 {

@@ -3,6 +3,7 @@
 #include <cmath>
 #include "../utils/tensor.hpp"
 
+
 template <class T>
 Tensor<T> * matpow(Tensor<T> *matA, T index)
 {

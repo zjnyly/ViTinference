@@ -4,16 +4,19 @@
 #include <string>
 #include "../utils/tensor.hpp"
 
-
-    template <class T>
-    class module
+template <class T>
+class module
+{
+public:
+    module<T>()
     {
-    public:
-        virtual module();
-        virtual vector<Tensor<T> *> forward(Tensor<T> *input) = 0;
+        std::cout<<"created"<<std::endl;
+    }
+    virtual std::string getName(){};
+    virtual std::vector<Tensor<T> *> forward(Tensor<T> *input){};
 
-    private:
-        std::map <std::string, module<T> *> net;
-        std::map <std::string, Tensor<T> *> data;
-    };
-
+private:
+    std::map<std::string, module<T> *> net;
+    std::map<std::string, Tensor<T> *> data;
+    std::string name;
+};

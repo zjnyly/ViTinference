@@ -20,7 +20,7 @@ Tensor<T> * Linear(Tensor<T> * input, std::string PATH_weight, std::string PATH_
     {
         auto bias = readNpyData<double>(PATH_bias, DIM_bias);
         // bias->showData();
-        addBias(ans, bias);
+        addBias<T>(ans, bias);
     }
 
     return ans;

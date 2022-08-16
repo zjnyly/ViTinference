@@ -2,6 +2,7 @@
 #include <vector>
 #include "../utils/tensor.hpp"
 
+
 template <class T>
 Tensor<T> *matdiv(Tensor<T> *matA, T divident, bool mult)
 {

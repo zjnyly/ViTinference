@@ -5,7 +5,6 @@
 #include "../utils/tensor.hpp"
 #include "../utils/utils.cpp"
 
-
 template <class T>
 void performConcat(
     T * originalData, 

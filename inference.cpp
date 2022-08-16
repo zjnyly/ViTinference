@@ -5,6 +5,8 @@
 // #include <opencv2/highgui/highgui.hpp>
 
 #include "./layer/vit.cpp"
+#include "./layer/vit.h"
+#include "./layer/module.h"
 
 using namespace std;
 
@@ -33,9 +35,25 @@ void test()
     }
 }
 
+void test2()
+{
+    std::vector<int> inputDataDimension = {1, 3, 4, 4};
+    auto inputData = new Tensor<double>(inputDataDimension, true);
+    std::vector<std::pair<std::string, int>> originalView = {{"b", 1}, {"c", 3}, {"h", 2}, {"p1", 2}, {"w", 2}, {"p2", 2}};
+    std::vector<int> originalDimension = {1, 3, 2, 2, 2, 2};
+    std::vector<std::pair<std::string, int>> rearrangedView = {{"b", 1}, {"h", 2}, {"w", 2}, {"p1", 2}, {"p2", 2}, {"c", 3}};
+    std::vector<int> rearrangedDimension = {1, 4, 12};
+    auto rearrangedData = rearrange<double>(inputData, originalView, rearrangedView, originalDimension, rearrangedDimension);
+//     std::vector<std::pair<int, int>> sliceMetric = {{0, 0}, {0, 49}, {0, 3072}};
+//     auto out_1 = slice(rearrangedData, sliceMetric);
+}
+
 int main()
 {
-    test();
+    //  module<double>();
+    // vit<double>("test");
+    // test2();
+    // while(1);
     // Fake input image, just one image per batch
     std::vector<int> inputDataDimension = {1, 3, 224, 224};
     auto inputData = new Tensor<double>(inputDataDimension, true);
@@ -44,7 +62,7 @@ int main()
     auto ans = ViT<double>(inputData);
     //////////////////////////////////
 
-    // ans->showRawData();
+    ans->showRawData();
 
     auto lables = ans->getDataPointer();
 
